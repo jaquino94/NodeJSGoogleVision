@@ -4,12 +4,13 @@
   "description": "NodeJS with Google Vision API",
   "main": "index.js",
   "scripts": {
-    "start":"nodemon NodeTest.js",
+    "start": "nodemon NodeTest.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/vision": "^1.6.0",
     "express": "^4.17.1"
   }
 }
