@@ -14,13 +14,21 @@
 <div class="container">
   <div class="jumbotron">
   <h2>Upload your image here</h2>
-  <form action="server_program_toUploadImageFile" encType="multipart/form-data">
+  <form action="/upload" method="post" encType="multipart/form-data">
     <div class="form-group">
      <input type="file" class="btn btn-info"name="pic" accept="image/*"> 
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
   </form>
 </div>
+  <% if ( labels ) { %>
+    <div>
+      <h2>RESULTS: </h2>
+      <% labels.forEach(function(label){ %>
+      <p> <%=label.description %> </p>
+      <% }) %>
+    </div>
+  <% } %>
 </div>
 
 </body>

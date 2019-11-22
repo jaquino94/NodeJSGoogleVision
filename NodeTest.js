@@ -1,24 +1,54 @@
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
 
 const app = express();
+const router = express.Router();
+const upload = multer({dest: __dirname + '/images'});
 
-async function quickstart() {
+
+/*app.use(express.static(path.join(__dirname, 'views')));*/
+app.set('view engine', 'ejs');
+
+async function analyze(req, res) {
   // Imports the Google Cloud client library
   const vision = require('@google-cloud/vision');
 
   // Creates a client
   const client = new vision.ImageAnnotatorClient();
 
-  // Performs label detection on the image file
-  const [result] = await client.labelDetection('./testimage.jpg');
-  console.log("ANALYZING IMAGE");
-  const labels = result.labelAnnotations;
-  console.log('Labels:');
-  labels.forEach(label => console.log(label.description));
+  if ( req.file ) {
+      const [result] = await client.labelDetection('./images/' + req.file.filename);
+      console.log("ANALYZING IMAGE");
+      const labels = result.labelAnnotations;
+      console.log('Labels:');
+      labels.forEach(label => console.log(label.description));
+
+      res.render('ImageInsert', {
+          labels: labels,
+      });
+  }
 }
 
+app.get('/', function(req, res) {
+    let labels = null;
+    res.render('ImageInsert', {
+        labels: labels,
+    });
+});
+
+app.post('/upload', upload.single('pic'), function(req, res) {
+    let labels = null;
+    if ( req.file ) {
+        analyze(req,res);
+        return;
+    }
+    res.render('ImageInsert', {
+        labels: labels,
+    });
+
+});
 
 app.listen(3000, () => {
-  quickstart();
   console.log('LISTENING ON PORT 3000');
 });
