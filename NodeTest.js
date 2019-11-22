@@ -1,9 +1,7 @@
 const express = require('express');
 const multer = require('multer');
-const path = require('path');
 
 const app = express();
-const router = express.Router();
 const upload = multer({dest: __dirname + '/images'});
 
 
@@ -35,6 +33,11 @@ app.get('/', function(req, res) {
     res.render('ImageInsert', {
         labels: labels,
     });
+});
+
+app.get('/HowTo', function(req, res) {
+    let labels = null;
+    res.render('HowTo');
 });
 
 app.post('/upload', upload.single('pic'), function(req, res) {
