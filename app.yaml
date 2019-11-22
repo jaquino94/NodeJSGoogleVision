@@ -1,2 +1,4 @@
 runtime: nodejs10
 env: standard
+env_variables:
+  GCLOUD_STORAGE_BUCKET: nodevision.appspot.com
