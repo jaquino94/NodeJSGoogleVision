@@ -1,4 +1,4 @@
 runtime: nodejs10
 env: standard
 env_variables:
-  GCLOUD_STORAGE_BUCKET: nodevision.appspot.com
+  GCLOUD_STORAGE_BUCKET: mystic-cable-258819.appspot.com
