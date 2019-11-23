@@ -1,6 +1,7 @@
 const {format} = require('util');
 const express = require('express');
 const multer = require('multer');
+const path = require('path');
 
 const app = express();
 const upload = multer();
@@ -11,7 +12,7 @@ const storage = new Storage();
 const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET);
 
 
-/*app.use(express.static(path.join(__dirname, 'views')));*/
+app.use(express.static(path.join(__dirname, 'views')));
 app.set('view engine', 'ejs');
 
 async function analyze(req, res) {
