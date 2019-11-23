@@ -30,8 +30,8 @@
               There were only 3 things that we needed to do to create the entire program:
             </p>
               <ul>
-                  <li>Create the backend to invoke the Google Cloud Vision API and return the results to the user</li>
                   <li>Create the frontend for the user to be able to upload an image</li>
+                  <li>Create the backend to invoke the Google Cloud Vision API and return the results to the user</li>
                   <li>A way to store the uploaded images to send to the Google Cloud Vision API</li>
               </ul>
             <h3>Creating the frontend</h3>
@@ -43,13 +43,34 @@
               <img src="./images/form.png" class="img-fluid" alt="Responsive image">
             </p>
 
-            <h3>Creating the backend</h3>
+            <h3>Creating the backend and handling storage for uploaded images</h3>
               <p>
-                  To start creating the backend, we first have to get the Google Cloud Vision library loaded into our server.
-                  We followed the instructions on how to download the library using the
-                  <a href=" https://cloud.google.com/vision/docs/libraries#client-libraries-install-nodejs">Google Cloud documentation</a>
+                  To start with the backend part, we followed the instructions on <a href=" https://cloud.google.com/vision/docs/libraries#client-libraries-install-nodejs">Google Cloud documentation</a>
+                  <li>Installed client library using command: npm install --save @google-cloud/vision</li><br>
+                  <li>Created a new project on Google Cloud and enabled Cloud Vision API.</li>
+              <img src="./images/enableAPI.png" class="img-fluid" alt="Responsive image"><p><br></p>
+                  <li>Set up authentication by creating a service account key which creates and downloads a JSON file containing key</li>
+                    <img src="./images/servicekey.png" class="img-fluid" alt="Responsive image"><p><br></p>
+                  <li>Set up new environment variable with a value equal to the path of the service key.</li>
+                    <img src="./images/envtvar.png" class="img-fluid" alt="Responsive image"><p><br></p>
+              <li>For backend handling, we created the NodeTest.js file.</li>
+              <li>It has an 'analyze' function that initializes the API client for sending requests to Cloud Vision API.</li>
+              <li>Uploaded file is stored in bucket which returns a blob pointer using BlobStream writer.</li>
+              <li>The API client is used to call labelDetection method which receives the uploaded image and returns a result array of labels. The labels are then passed to the rendered view page.</li>
+
               </p>
 
+              <h3>Deployed application on gae</h3>
+              <p>Created an app engine application and used command: gcloud app deploy
+                  <img src="./images/gaedeploy.png" class="img-fluid" alt="Responsive image"><br><br><br><br><br>
+              </p>
+
+              <h3>Screenshot of running application</h3>
+              <p>Uploading image file
+                  <img src="./images/app1.png" class="img-fluid" alt="Responsive image"><br><br><br>
+                  Displaying labels for uploaded image
+                  <img src="./images/app2.png" class="img-fluid" alt="Responsive image"><br><br>
+              </p>
           </div>
         </div>
     </body>

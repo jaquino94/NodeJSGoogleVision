@@ -42,7 +42,7 @@ async function analyze(req, res) {
 
       blobStream.end(req.file.buffer);
 
-      const [result] = await client.labelDetection('gs://nodevision.appspot.com/' + req.file.originalname);
+      const [result] = await client.labelDetection('gs://mystic-cable-258819.appspot.com/' + req.file.originalname);
       console.log("ANALYZING IMAGE");
       const labels = result.labelAnnotations;
       console.log('Labels:');
